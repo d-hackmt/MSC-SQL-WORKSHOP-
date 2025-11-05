@@ -1,5 +1,13 @@
 ### **MSC-SQL-WORKSHOP**
 
+--- 
+
+AGENDA  :
+
+DAY 1 - ALL SQL Query Operations
+DaY 2  - 
+
+---
 ---
 
 ### All DBMS - SQL Basics - https://github.com/d-hackmt/DBMS---SQL-BSC-SY-SSE/tree/main/External%20Exam%20Prep

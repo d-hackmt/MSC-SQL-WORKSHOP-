@@ -5,6 +5,8 @@
 AGENDA  :
 
 DAY 1 - ALL SQL Query Operations
+
+
 DaY 2  - 
 
 ---

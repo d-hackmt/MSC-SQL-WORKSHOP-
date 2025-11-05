@@ -1,5 +1,9 @@
 ### **MSC-SQL-WORKSHOP**
 
+
+
+
+
 --- 
 
 AGENDA  :
@@ -11,6 +15,10 @@ DaY 2  -
 
 ---
 ---
+
+<img width="400" height="215" alt="image" src="https://github.com/user-attachments/assets/3876346a-e104-41f8-adeb-63780af0f589" />
+
+
 
 ### All DBMS - SQL Basics - https://github.com/d-hackmt/DBMS---SQL-BSC-SY-SSE/tree/main/External%20Exam%20Prep
 
@@ -31,6 +39,6 @@ DaY 2  -
 
 ---
 
-<img width="1125" height="587" alt="image" src="https://github.com/user-attachments/assets/29449560-eb09-44c2-81ac-d844fe2d1275" />
+
 
 

@@ -39,6 +39,6 @@ DaY 2  -
 
 ---
 
-
+### Query Performance : https://stackoverflow.com/questions/9425134/mysql-duration-and-fetch-time
 
 

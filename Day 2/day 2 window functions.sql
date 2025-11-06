@@ -69,6 +69,7 @@ amount*100/SUM(amount) over() as pct
 from expenses
 order by category;
 
+
 /*
 
  now you can see what results we got , so 
@@ -84,8 +85,17 @@ order by category;
 
 */
 
+
+-- we can definitely check the total
+
+SELECT category , SUM(amount) 
+from expenses
+group by category;
+
+
 SELECT sum(amount) from expenses
 where category = "food";
+
 
 -- 11800  (sum for food category)
 

@@ -418,6 +418,120 @@ Chapter:- SQL Advanced: Top Customers, Products, Markets
 
 
 
+-------------------------------
+
+
+use random_tables;
+
+SELECt *,
+amount*100/SUM(amount) 
+over(partition by category) as pct 
+from expenses
+order by category;
+
+SELECT SUM(amount) from expenses;
+
+
+SELECT SUM(amount) from expenses
+where category = "food";
+
+
+SELECT *,
+SUM(amount) over(partition by category order by date) as amt
+from expenses
+order by category , date;
+
+SELECT category ,SUM(amount) 
+from expenses group by category;
+
+with cte1 as (
+SELECT customer,
+ROUND(SUM(net_sales)/1000000 , 2) as net_sales_mln
+from net_sls
+where fiscal_year = 2021
+group by customer
+order by net_sales_mln DESC)
+SELECT *,
+net_sales_mln*100/SUM(net_sales_mln) over() as net_sales_mln_pct
+from cte1
+order by net_sales_mln_pct DESC;
+
+
+
+
+with cte1 as (
+SELECT customer,region,
+ROUND(SUM(net_sales)/1000000 , 2) as net_sales_mln
+from net_sls
+where fiscal_year = 2021
+group by customer,region
+order by net_sales_mln DESC)
+SELECT *,
+net_sales_mln*100/SUM(net_sales_mln) over(partition by region) as net_sales_mln_pct
+from cte1
+order by region,net_sales_mln_pct DESC;
+
+-- top 2 expenses of each categories
+
+SELECT * ,
+row_number() over(partition by category order by amount DESC) as rn , 
+rank() over(partition by category order by amount DESC) as rnk,
+dense_rank() over(partition by category order by amount DESC) as drnk
+from expenses 
+order by category;
+
+
+SELECT * from fact_sales_monthly;
+
+SELECT p.division , p.product ,
+SUM(s.sold_quantity) as total_qty
+from fact_sales_monthly s 
+JOIN dim_product p
+	on p.product_code = s.product_code
+where fiscal_year = 2021
+group by p.product;
+
+with cte1 as (
+SELECT p.division , p.product ,
+SUM(s.sold_quantity) as total_qty
+from fact_sales_monthly s 
+JOIN dim_product p
+	on p.product_code = s.product_code
+where fiscal_year = 2021
+group by p.product),
+cte2 as (
+SELECT division,product,total_qty,
+dense_rank() over(partition by division order by total_qty DESC) as rn
+from cte1)
+SELECT division,product,total_qty from cte2
+where rn<=3;
+
+SELECT s.market, c.region, 
+ROUND(SUM(gross_price_total)/1000000,2) as gross_sales_mln 
+FROM gross_sales s
+join dim_customer c
+using (customer_code)
+group by s.market;
+
+
+with cte1 as(
+SELECT s.market, c.region, 
+ROUND(SUM(gross_price_total)/1000000,2) as gross_sales_mln 
+FROM gross_sales s
+join dim_customer c
+using (customer_code)
+where s.fiscal_year = 2021
+group by s.market ,c.region),
+cte2 as (
+SELECT *,
+dense_rank() over(partition by region order by gross_sales_mln DESC) as rn
+from cte1)
+SELECT * from cte2
+where rn<=2;
+
+
+
+
 
 
 
